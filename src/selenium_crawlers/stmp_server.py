@@ -42,7 +42,3 @@ class SendMultipartEmail:
         """
         print(html_content)
         self.msg.attach(MIMEText(html_content, 'html'))
-
-
-
-
