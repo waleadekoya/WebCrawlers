@@ -2,12 +2,30 @@ name: test-github-actions
 run-name: ${{ github.actor }} checking Github Actions
 on: [push]
 jobs:
-  check-bats-version:
+  deploy:
+    name: Upload result to Amazon S3
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials from Account
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+          role-to-assume: arn:aws:iam::578120814996:role/GithubActionsRole
+          aws-region: eu-west-1
+      - name: List S3 buckets
+        run: |
+          aws s3 ls s3://project-cloudformation-sessions/
+
+#  check-bats-version:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: '14'
+#      - run: npm install -g bats
+#      - run: bats -v
