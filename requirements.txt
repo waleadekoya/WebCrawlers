@@ -5,3 +5,5 @@ scrapy-playwright
 pandas
 webdriver-manager
 openpyxl
+xlsxwriter
+pyshorteners

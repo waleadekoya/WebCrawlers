@@ -1,17 +1,20 @@
 import math
+import os
 import time
+
 import pandas as pd
-import selenium
 # selenium 4
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-# options to add as arguments
-from selenium.webdriver.chrome.options import Options
+from selenium_crawlers.stmp_server import SendMultipartEmail
 
+# options to add as arguments
+
+bitly_access_token = os.getenv('BITLY_API_ACCESS_TOKEN')
 user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2'
 option = webdriver.ChromeOptions()
 option.add_argument("start-maximized")
@@ -19,7 +22,7 @@ option.add_argument("--headless")
 option.add_argument("--window-size=1920,1080")
 option.add_argument(f'user-agent={user_agent}')
 
-base_url = 'https://uk.indeed.com/jobs?q=kyc+aml&fromage=14'
+base_url = 'https://uk.indeed.com/jobs?q=kyc+aml&fromage=7'
 
 # chrome to stay open
 option.add_experimental_option("detach", True)
@@ -40,7 +43,7 @@ else:
     results_count = int(page_text.replace(" jobs", ''))
 print("Total number of jobs:", results_count)
 page_count = math.ceil(results_count / 15)
-print("total number of pages:", page_count)
+print("Total number of pages:", page_count)
 
 
 def get_salary(url: str):
@@ -68,7 +71,6 @@ if page_count > 1:
         data = [{
             'title': url.text,
             'url': driver.find_element(By.LINK_TEXT, url.text).get_attribute('href'),
-            # 'salary': driver.find_element(By.CSS_SELECTOR, "div.metadata.salary-snippet-container").text
         }
             for url in driver.find_elements(By.XPATH, '//h2[@class="jobTitle jobTitle-newJob css-bdjp2m eu4oa1w0"]')
         ]
@@ -77,6 +79,12 @@ if page_count > 1:
         results.extend(data)
 
 df = pd.DataFrame(results).drop_duplicates().reset_index(drop=True)
-print(df)
-df.to_excel('kyc_analyst_jobs.xlsx', index=False)
 driver.quit()
+print(df)
+
+SendMultipartEmail(
+    subject='KYC Analyst Indeed Jobs',
+    sender='wale.adekoya@btinternet.com',
+    recipients='chezyfive@yahoo.com,sesan.adekoya@sestogroup.com',  # ,favour.adekoya@yahoo.com',
+    attachment_body=df.to_html(index=False, col_space='100px')
+)
