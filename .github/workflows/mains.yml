@@ -26,7 +26,6 @@ jobs:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
           type -a python3
-
           echo $EMAIL_HOST
           /usr/bin/python3 -m pip install -r requirements.txt
           cd ./src/selenium_crawlers
