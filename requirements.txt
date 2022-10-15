@@ -1,0 +1,7 @@
+Scrapy
+selenium
+beautifulsoup4
+scrapy-playwright
+pandas
+webdriver-manager
+openpyxl
