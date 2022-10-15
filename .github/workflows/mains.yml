@@ -1,9 +1,15 @@
 name: test-github-actions
 run-name: ${{ github.actor }} checking Github Actions
-on: [push]
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron:  '0 9 * * *'
 jobs:
   deploy:
-    name: Upload result to Amazon S3
+    name: Run Web Crawlers
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -30,3 +36,6 @@ jobs:
           /usr/bin/python3 -m pip install -r requirements.txt
           cd ./src/selenium_crawlers
           /usr/bin/python3 ./indeed_selenium.py
+
+# https://crontab.guru/examples.html
+# https://www.jeffgeerling.com/blog/2020/running-github-actions-workflow-on-schedule-and-other-events

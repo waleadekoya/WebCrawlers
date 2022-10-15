@@ -85,6 +85,6 @@ print(df)
 SendMultipartEmail(
     subject='KYC Analyst Indeed Jobs',
     sender='wale.adekoya@btinternet.com',
-    recipients='chezyfive@yahoo.com,sesan.adekoya@sestogroup.com',  # ,favour.adekoya@yahoo.com',
+    recipients='chezyfive@yahoo.com,favour.adekoya@yahoo.com,wale.adekoya@btinternet.com',
     attachment_body=df.to_html(index=False, col_space='100px')
 )
