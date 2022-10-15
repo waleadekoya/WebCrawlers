@@ -41,4 +41,5 @@ class SendMultipartEmail:
         </html>
         """
         print(html_content)
+        print("test env variables", os.getenv('EMAIL_HOST'))
         self.msg.attach(MIMEText(html_content, 'html'))
