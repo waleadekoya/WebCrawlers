@@ -24,5 +24,5 @@ jobs:
           type -a python3
           ls
           /usr/bin/python3 -m pip install -r requirements.txt
-          cd ./src
-          /usr/bin/python3 ./selenium_crawlers/indeed_selenium.py
+          cd ./src/selenium_crawlers
+          /usr/bin/python3 ./indeed_selenium.py
