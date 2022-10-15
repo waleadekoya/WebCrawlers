@@ -21,9 +21,9 @@ jobs:
           aws s3 ls s3://project-cloudformation-sessions/
       - name: run crawler
         env:
-          EMAIL_HOST: ${{ EMAIL_HOST }}
-          EMAIL_ID: ${{ EMAIL_ID }}
-          EMAIL_PASSWORD: ${{ EMAIL_PASSWORD }}
+          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+          EMAIL_ID: ${{ secrets.EMAIL_ID }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
           type -a python3
           export EMAIL_HOST="$EMAIL_HOST"
