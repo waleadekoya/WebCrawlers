@@ -20,9 +20,13 @@ jobs:
         run: |
           aws s3 ls s3://project-cloudformation-sessions/
       - name: run crawler
+        env:
+          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+          EMAIL_ID: ${{ secrets.EMAIL_ID }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_ID }}
         run: |
           type -a python3
-          ls
+          echo ${{ EMAIL_HOST }}
           /usr/bin/python3 -m pip install -r requirements.txt
           cd ./src/selenium_crawlers
           /usr/bin/python3 ./indeed_selenium.py
