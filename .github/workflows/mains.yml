@@ -19,7 +19,6 @@ jobs:
       - name: List S3 buckets
         run: |
           aws s3 ls s3://project-cloudformation-sessions/
-          where python
       - name: run crawler
         run: |
           type -a python3
