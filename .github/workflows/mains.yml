@@ -41,9 +41,8 @@ jobs:
       - name: run indeed crawler
         run: |
           type -a python3
-          echo $EMAIL_HOST 
           /usr/bin/python3 -m pip install -r requirements.txt
-          echo ls
+          ls .
           /usr/bin/python3 ./src/setup.py install
           cd ./src/selenium_crawlers
           /usr/bin/python3 ./indeed_selenium.py
