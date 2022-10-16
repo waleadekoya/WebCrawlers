@@ -33,6 +33,8 @@ from utils.config import indeed_search_word, recipients, title
 # option.add_argument("--window-size=1920,1080")
 # option.add_argument(f'user-agent={user_agent}')
 #
+
+print('search word read is:', os.getenv('SEARCH_WORD'))
 base_url = f'https://uk.indeed.com/jobs?q={indeed_search_word}&fromage=7'
 #
 # # chrome to stay open
