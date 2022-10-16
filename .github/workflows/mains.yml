@@ -50,7 +50,7 @@ jobs:
           export SEARCH_WORD="PYTHON DEVELOPER"
           python ./src/selenium_crawlers/indeed_selenium.py  
           cd ./src/maredo_web_crawler
-          scrapy crawl reed -O reed.json
+          scrapy crawl reed -O reed_jobs.json
           cd ../..
           ls ./src/maredo_web_crawler
           python ./src/utils/items_loader.py
@@ -58,7 +58,7 @@ jobs:
           export SEARCH_WORD="KYC ALM COMPLIANCE"
           python ./src/selenium_crawlers/indeed_selenium.py    
           cd ./src/maredo_web_crawler
-          scrapy crawl reed -O reed.json
+          scrapy crawl reed -O reed_jobs.json
           cd ../..
           ls ./src/maredo_web_crawler
           python ./src/utils/items_loader.py

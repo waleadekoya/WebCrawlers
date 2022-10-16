@@ -94,7 +94,7 @@ driver.quit()
 print(df)
 
 SendMultipartEmail(
-    subject=f'{title} Reed Jobs',
+    subject=f'{title} Indeed Jobs',
     sender='wale.adekoya@btinternet.com',
     recipients=recipients,
     attachment_body=df.to_html(index=False, col_space='100px')
