@@ -6,5 +6,6 @@ setup(name='WebCrawlers',
       author='Wale Adekoya',
       author_email='wale.adekoya@btinternet.com',
       url='https://github.com/waleadekoya/WebCrawler',
-      packages=['utils', 'selenium_crawlers']
+      py_modules=['utils', 'selenium_crawlers']
+      # packages=['utils', 'selenium_crawlers']
       )
