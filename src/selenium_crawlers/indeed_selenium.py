@@ -5,7 +5,7 @@ import time
 
 import pandas as pd
 
-print(pathlib.Path(__file__).parent.parent.parent.__str__())
+print("added to sys path: ", pathlib.Path(__file__).parent.parent.parent.__str__())
 sys.path.append(pathlib.Path(__file__).parent.parent.parent.__str__())
 
 from utils.selenium_webdriver import driver, NoSuchElementException, By
