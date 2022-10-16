@@ -13,7 +13,8 @@ sys.path.append(pathlib.Path(__file__).parent.parent.__str__())
 
 from utils.selenium_webdriver import driver
 from utils.stmp_server import SendMultipartEmail
-from utils.config import indeed_search_word
+from utils.config import indeed_search_word, recipients, title
+
 # # selenium 4
 # from selenium import webdriver
 # from selenium.common.exceptions import NoSuchElementException
@@ -93,8 +94,8 @@ driver.quit()
 print(df)
 
 SendMultipartEmail(
-    subject='KYC Analyst Indeed Jobs',
+    subject=f'{title} Reed Jobs',
     sender='wale.adekoya@btinternet.com',
-    recipients='chezyfive@yahoo.com,favour.adekoya@yahoo.com,wale.adekoya@btinternet.com',
+    recipients=recipients,
     attachment_body=df.to_html(index=False, col_space='100px')
 )

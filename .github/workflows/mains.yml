@@ -46,10 +46,12 @@ jobs:
           type -a python3
           python -m pip install -r requirements.txt
           ls ./src
+          
           export SEARCH_WORD="PYTHON DEVELOPER"
           python ./src/selenium_crawlers/indeed_selenium.py  
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed.json
+          ls ./src/maredo_web_crawler
           cd ../..
           python ./src/utils/items_loader.py
           
@@ -57,10 +59,7 @@ jobs:
           python ./src/selenium_crawlers/indeed_selenium.py    
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed.json
-          cd ../..
-          python ./src/utils/items_loader.py
-          cd ./src/maredo_web_crawler
-          scrapy crawl reed -O reed.json
+          ls ./src/maredo_web_crawler
           cd ../..
           python ./src/utils/items_loader.py
 
