@@ -22,6 +22,10 @@ jobs:
       id-token: write
       contents: read
     steps:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip' # caching pip dependencies
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -35,10 +39,7 @@ jobs:
         run: |
           aws s3 ls s3://project-cloudformation-sessions/
       - name: run indeed crawler
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-          cache: 'pip' # caching pip dependencies
+
         run: |
           type -a python3
           echo $EMAIL_HOST
