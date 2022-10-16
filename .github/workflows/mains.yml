@@ -43,7 +43,7 @@ jobs:
           type -a python3
           /usr/bin/python3 -m pip install -r requirements.txt
           ls ./src
-#          /usr/bin/python3 ./src/setup.py install
+          /usr/bin/python3 ./src/setup.py install
           cd ./src/selenium_crawlers
           /usr/bin/python3 ./indeed_selenium.py
       - name: run reed crawler
