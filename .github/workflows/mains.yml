@@ -38,16 +38,29 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip' # caching pip dependencies
-      - name: run indeed and reed crawler
+      - name: run kyc jobs crawler
         run: |
           type -a python3
           /usr/bin/python3 -m venv env
           source ./env/bin/activate
-          type -a python3
           python -m pip install -r requirements.txt
           ls ./src
           
           export SEARCH_WORD="KYC AML COMPLIANCE"
+          python ./src/selenium_crawlers/indeed_selenium.py    
+          cd ./src/maredo_web_crawler
+          scrapy crawl reed -O reed_jobs.json
+          cd ../..
+          ls ./src/maredo_web_crawler
+          python ./src/utils/items_loader.py
+      - name: run python jobs crawler
+        run: |
+          /usr/bin/python3 -m venv env
+          source ./env/bin/activate
+          python -m pip install -r requirements.txt
+          ls ./src
+          
+          export SEARCH_WORD="PYTHON DEVELOPER"
           python ./src/selenium_crawlers/indeed_selenium.py    
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed_jobs.json
