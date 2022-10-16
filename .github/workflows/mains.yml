@@ -41,11 +41,14 @@ jobs:
       - name: run indeed crawler
         run: |
           type -a python3
-          /usr/bin/python3 -m pip install -r requirements.txt
+          /usr/bin/python3 -m venv env
+          source ./env/bin/activate
+          type -a python3
+          python -m pip install -r requirements.txt
           ls ./src
-          /usr/bin/python3 ./src/setup.py install
+          python ./src/setup.py install
           cd ./src/selenium_crawlers
-          /usr/bin/python3 ./indeed_selenium.py
+          python ./indeed_selenium.py
       - name: run reed crawler
         run: |
           cd ./src/maredo_web_crawler
