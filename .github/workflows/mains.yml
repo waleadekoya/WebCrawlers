@@ -38,7 +38,7 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip' # caching pip dependencies
-      - name: run indeed crawler
+      - name: run indeed and reed crawler
         run: |
           type -a python3
           /usr/bin/python3 -m venv env
@@ -47,13 +47,18 @@ jobs:
           python -m pip install -r requirements.txt
           ls ./src
           python ./src/setup.py install
-          python ./src/selenium_crawlers/indeed_selenium.py
-      - name: run reed crawler
-        run: |
+          python ./src/selenium_crawlers/indeed_selenium.py      
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed.json
           cd ../..
           python ./src/utils/items_loader.py
+
+#      - name: run reed crawler
+#        run: |
+#          cd ./src/maredo_web_crawler
+#          scrapy crawl reed -O reed.json
+#          cd ../..
+#          python ./src/utils/items_loader.py
           
 
 # https://crontab.guru/examples.html
