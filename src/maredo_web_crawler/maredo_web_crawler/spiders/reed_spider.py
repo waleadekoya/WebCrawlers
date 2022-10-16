@@ -1,16 +1,17 @@
+import os
 import pathlib
 import sys
 from typing import Optional
 
 import scrapy
 
-sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.__str__())
+reed_search_word = "-".join(os.getenv("SEARCH_WORD").lower().split(" ")) + "-jobs"
 
 
 class ReedSpider(scrapy.Spider):
     name: Optional[str] = "reed"
     base_url = "https://www.reed.co.uk"
-    search_string = "jobs/kyc-jobs?datecreatedoffset=LastWeek"
+    search_string = f"jobs/{reed_search_word}?datecreatedoffset=LastWeek"
     paginator = 1
     incrementer = 0
 

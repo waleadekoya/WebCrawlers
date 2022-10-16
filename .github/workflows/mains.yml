@@ -46,20 +46,23 @@ jobs:
           type -a python3
           python -m pip install -r requirements.txt
           ls ./src
-          python ./src/selenium_crawlers/indeed_selenium.py      
+          export SEARCH_WORD="PYTHON DEVELOPER"
+          python ./src/selenium_crawlers/indeed_selenium.py  
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed.json
           cd ../..
           python ./src/utils/items_loader.py
-
-#           python ./src/setup.py install
-#      - name: run reed crawler
-#        run: |
-#          cd ./src/maredo_web_crawler
-#          scrapy crawl reed -O reed.json
-#          cd ../..
-#          python ./src/utils/items_loader.py
           
+          export SEARCH_WORD="KYC ALM COMPLIANCE"
+          python ./src/selenium_crawlers/indeed_selenium.py    
+          cd ./src/maredo_web_crawler
+          scrapy crawl reed -O reed.json
+          cd ../..
+          python ./src/utils/items_loader.py
+          cd ./src/maredo_web_crawler
+          scrapy crawl reed -O reed.json
+          cd ../..
+          python ./src/utils/items_loader.py
 
 # https://crontab.guru/examples.html
 # https://www.jeffgeerling.com/blog/2020/running-github-actions-workflow-on-schedule-and-other-events

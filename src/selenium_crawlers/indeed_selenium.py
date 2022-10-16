@@ -1,15 +1,19 @@
 import math
+import os
 import pathlib
 import sys
 import time
 
 import pandas as pd
+from selenium.common import NoSuchElementException
+from selenium.webdriver.common.by import By
 
 print("added to sys path: ", pathlib.Path(__file__).parent.parent.__str__())
 sys.path.append(pathlib.Path(__file__).parent.parent.__str__())
 
-from utils.selenium_webdriver import driver, NoSuchElementException, By
+from utils.selenium_webdriver import driver
 from utils.stmp_server import SendMultipartEmail
+from utils.config import indeed_search_word
 # # selenium 4
 # from selenium import webdriver
 # from selenium.common.exceptions import NoSuchElementException
@@ -28,7 +32,7 @@ from utils.stmp_server import SendMultipartEmail
 # option.add_argument("--window-size=1920,1080")
 # option.add_argument(f'user-agent={user_agent}')
 #
-base_url = 'https://uk.indeed.com/jobs?q=kyc+aml&fromage=7'
+base_url = f'https://uk.indeed.com/jobs?q={indeed_search_word}&fromage=7'
 #
 # # chrome to stay open
 # option.add_experimental_option("detach", True)
