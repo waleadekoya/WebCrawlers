@@ -4,7 +4,7 @@ import pandas as pd
 
 from stmp_server import SendMultipartEmail
 
-reed_jobs = Path(__file__).parent.parent / "src/maredo_web_crawler/reed.json"
+reed_jobs = Path(__file__).parent.parent / "maredo_web_crawler/reed.json"
 
 data = pd.read_json(reed_jobs)
 
