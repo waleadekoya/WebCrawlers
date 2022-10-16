@@ -1,1 +1,0 @@
-packages = ['src/ci_test', 'tests']
