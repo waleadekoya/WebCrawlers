@@ -1,12 +1,19 @@
-name: test-github-actions
+name: crawlers-github-actions
 run-name: ${{ github.actor }} Github Actions
 on:
-#  push:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
   schedule:
     - cron:  '0 */6 * * *'
+env:
+  EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+  EMAIL_ID: ${{ secrets.EMAIL_ID }}
+  EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+
 jobs:
   deploy:
     name: Run Web Crawlers
@@ -27,17 +34,24 @@ jobs:
       - name: List S3 buckets
         run: |
           aws s3 ls s3://project-cloudformation-sessions/
-      - name: run crawler
-        env:
-          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
-          EMAIL_ID: ${{ secrets.EMAIL_ID }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      - name: run indeed crawler
+#        env:
+#          EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+#          EMAIL_ID: ${{ secrets.EMAIL_ID }}
+#          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: |
           type -a python3
           echo $EMAIL_HOST
           /usr/bin/python3 -m pip install -r requirements.txt
           cd ./src/selenium_crawlers
           /usr/bin/python3 ./indeed_selenium.py
+      - name: run reed crawler
+        run: |
+          cd ./src/maredo_web_crawler
+          scrapy crawl reed -O reed.json
+          cd ../..
+          /usr/bin/python3 utils/items_loader.py
+          
 
 # https://crontab.guru/examples.html
 # https://www.jeffgeerling.com/blog/2020/running-github-actions-workflow-on-schedule-and-other-events

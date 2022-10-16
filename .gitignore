@@ -2,3 +2,4 @@
 WebCrawlers.iml
 *.xlsx
 *.csv
+*__pycache__*

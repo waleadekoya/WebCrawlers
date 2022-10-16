@@ -1,6 +1,10 @@
-from typing import Optional, List, Dict
+import pathlib
+import sys
+from typing import Optional
 
 import scrapy
+
+sys.path.append(pathlib.Path(__file__).parent.parent.parent.parent.parent.__str__())
 
 
 class ReedSpider(scrapy.Spider):
@@ -11,7 +15,7 @@ class ReedSpider(scrapy.Spider):
     incrementer = 0
 
     # start_urls: Optional[List[str]] = [
-    #     "https://www.reed.co.uk/jobs/business-analyst-kyc-jobs?salaryfrom=60000"
+    #     "https://www.reed.co.uk/jobs/kyc-jobs?datecreatedoffset=LastWeek"
     # ]
 
     def start_requests(self):
@@ -24,12 +28,12 @@ class ReedSpider(scrapy.Spider):
     def parse(self, response, **kwargs):
         feedback = response.xpath('//h3/a[@href]')
         print(len(feedback))
-        hrefs = (f"{self.base_url}" + link.attrib.get("href") for link in feedback)
         print("================================================")
-        for idx, link in enumerate(hrefs, start=1):
+        for idx, link in enumerate(feedback, start=1):
             yield {
                 "S/N": idx if self.incrementer < len(feedback) else idx + self.incrementer,
-                "Job URL": link
+                'Title': link.attrib.get("title"),
+                "Url": f"{self.base_url}" + link.attrib.get("href"),
             }
         self.incrementer += len(feedback)
 

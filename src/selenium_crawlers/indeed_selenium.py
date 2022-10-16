@@ -3,31 +3,33 @@ import os
 import time
 
 import pandas as pd
-# selenium 4
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 
-from stmp_server import SendMultipartEmail
-
-# options to add as arguments
-
-bitly_access_token = os.getenv('BITLY_API_ACCESS_TOKEN')
-user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2'
-option = webdriver.ChromeOptions()
-option.add_argument("start-maximized")
-option.add_argument("--headless")
-option.add_argument("--window-size=1920,1080")
-option.add_argument(f'user-agent={user_agent}')
-
+from utils.selenium_webdriver import driver, NoSuchElementException, By
+from utils.stmp_server import SendMultipartEmail
+# # selenium 4
+# from selenium import webdriver
+# from selenium.common.exceptions import NoSuchElementException
+# from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.common.by import By
+# from webdriver_manager.chrome import ChromeDriverManager
+#
+# from utils.stmp_server import SendMultipartEmail
+#
+# # options to add as arguments
+#
+# user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.2 (KHTML, like Gecko) Chrome/22.0.1216.0 Safari/537.2'
+# option = webdriver.ChromeOptions()
+# option.add_argument("start-maximized")
+# option.add_argument("--headless")
+# option.add_argument("--window-size=1920,1080")
+# option.add_argument(f'user-agent={user_agent}')
+#
 base_url = 'https://uk.indeed.com/jobs?q=kyc+aml&fromage=7'
-
-# chrome to stay open
-option.add_experimental_option("detach", True)
-
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=option)
+#
+# # chrome to stay open
+# option.add_experimental_option("detach", True)
+#
+# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=option)
 
 driver.get(base_url)
 time.sleep(2)
@@ -82,9 +84,9 @@ df = pd.DataFrame(results).drop_duplicates().reset_index(drop=True)
 driver.quit()
 print(df)
 
-SendMultipartEmail(
-    subject='KYC Analyst Indeed Jobs',
-    sender='wale.adekoya@btinternet.com',
-    recipients='chezyfive@yahoo.com,favour.adekoya@yahoo.com,wale.adekoya@btinternet.com',
-    attachment_body=df.to_html(index=False, col_space='100px')
-)
+# SendMultipartEmail(
+#     subject='KYC Analyst Indeed Jobs',
+#     sender='wale.adekoya@btinternet.com',
+#     recipients='chezyfive@yahoo.com,favour.adekoya@yahoo.com,wale.adekoya@btinternet.com',
+#     attachment_body=df.to_html(index=False, col_space='100px')
+# )
