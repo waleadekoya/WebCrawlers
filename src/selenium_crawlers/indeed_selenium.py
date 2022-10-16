@@ -5,8 +5,8 @@ import time
 
 import pandas as pd
 
-print("added to sys path: ", pathlib.Path(__file__).parent.parent.parent.__str__())
-sys.path.append(pathlib.Path(__file__).parent.parent.parent.__str__())
+print("added to sys path: ", pathlib.Path(__file__).parent.parent.__str__())
+sys.path.append(pathlib.Path(__file__).parent.parent.__str__())
 
 from utils.selenium_webdriver import driver, NoSuchElementException, By
 from utils.stmp_server import SendMultipartEmail
