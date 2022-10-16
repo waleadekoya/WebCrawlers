@@ -51,16 +51,16 @@ jobs:
           python ./src/selenium_crawlers/indeed_selenium.py  
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed.json
-          ls ./src/maredo_web_crawler
           cd ../..
+          ls ./src/maredo_web_crawler
           python ./src/utils/items_loader.py
           
           export SEARCH_WORD="KYC ALM COMPLIANCE"
           python ./src/selenium_crawlers/indeed_selenium.py    
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed.json
-          ls ./src/maredo_web_crawler
           cd ../..
+          ls ./src/maredo_web_crawler
           python ./src/utils/items_loader.py
 
 # https://crontab.guru/examples.html
