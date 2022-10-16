@@ -47,7 +47,7 @@ jobs:
           python -m pip install -r requirements.txt
           ls ./src
           
-          export SEARCH_WORD="KYC ALM"
+          export SEARCH_WORD="KYC AML COMPLIANCE"
           python ./src/selenium_crawlers/indeed_selenium.py    
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed_jobs.json

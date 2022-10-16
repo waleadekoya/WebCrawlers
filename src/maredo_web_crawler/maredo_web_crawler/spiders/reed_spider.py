@@ -5,7 +5,7 @@ from typing import Optional
 
 import scrapy
 
-reed_search_word = "-".join(os.getenv("SEARCH_WORD").lower().split(" ")) + "-jobs"
+reed_search_word = '-'.join(os.getenv("SEARCH_WORD").lower().split()) + "-jobs"
 
 
 class ReedSpider(scrapy.Spider):
@@ -24,6 +24,7 @@ class ReedSpider(scrapy.Spider):
             f"{self.base_url}/{self.search_string}"
         ]
         for url in urls:
+            print(url)
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response, **kwargs):
