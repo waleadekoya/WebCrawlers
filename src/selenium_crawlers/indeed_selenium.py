@@ -1,8 +1,12 @@
 import math
-import os
+import pathlib
+import sys
 import time
 
 import pandas as pd
+
+print(pathlib.Path(__file__).parent.parent.parent.__str__())
+sys.path.append(pathlib.Path(__file__).parent.parent.parent.__str__())
 
 from utils.selenium_webdriver import driver, NoSuchElementException, By
 from utils.stmp_server import SendMultipartEmail
@@ -84,9 +88,9 @@ df = pd.DataFrame(results).drop_duplicates().reset_index(drop=True)
 driver.quit()
 print(df)
 
-# SendMultipartEmail(
-#     subject='KYC Analyst Indeed Jobs',
-#     sender='wale.adekoya@btinternet.com',
-#     recipients='chezyfive@yahoo.com,favour.adekoya@yahoo.com,wale.adekoya@btinternet.com',
-#     attachment_body=df.to_html(index=False, col_space='100px')
-# )
+SendMultipartEmail(
+    subject='KYC Analyst Indeed Jobs',
+    sender='wale.adekoya@btinternet.com',
+    recipients='chezyfive@yahoo.com,favour.adekoya@yahoo.com,wale.adekoya@btinternet.com',
+    attachment_body=df.to_html(index=False, col_space='100px')
+)
