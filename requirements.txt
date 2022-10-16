@@ -6,4 +6,3 @@ pandas
 webdriver-manager
 openpyxl
 xlsxwriter
-pyshorteners

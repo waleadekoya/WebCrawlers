@@ -47,14 +47,13 @@ jobs:
           python -m pip install -r requirements.txt
           ls ./src
           python ./src/setup.py install
-          cd ./src/selenium_crawlers
-          python ./indeed_selenium.py
+          python ./src/selenium_crawlers/indeed_selenium.py
       - name: run reed crawler
         run: |
           cd ./src/maredo_web_crawler
           scrapy crawl reed -O reed.json
           cd ../..
-          /usr/bin/python3 utils/items_loader.py
+          python ./src/utils/items_loader.py
           
 
 # https://crontab.guru/examples.html
