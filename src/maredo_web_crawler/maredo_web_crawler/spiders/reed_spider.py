@@ -5,7 +5,9 @@ from typing import Optional
 
 import scrapy
 
-reed_search_word = '-'.join(os.getenv("SEARCH_WORD").lower().split()) + "-jobs"
+key_word = os.getenv("SEARCH_WORD").replace('"', '') + " jobs"
+reed_search_word = '-'.join(f"{key_word.lower()}".split())
+print("keyword is ", reed_search_word)
 
 
 class ReedSpider(scrapy.Spider):
@@ -24,11 +26,12 @@ class ReedSpider(scrapy.Spider):
             f"{self.base_url}/{self.search_string}"
         ]
         for url in urls:
-            print(url)
+            print("scraped url:" + url)
+            print("============================================================================")
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response, **kwargs):
-        feedback = response.xpath('//h3/a[@href]')
+        feedback = response.xpath('//h2/a[@href]')
         print(len(feedback))
         print("================================================")
         for idx, link in enumerate(feedback, start=1):
