@@ -19,7 +19,5 @@ try:
         recipients=recipients,
         attachment_body=data.to_html(index=False, col_space='100px')
     )
-    reed_jobs.unlink()
 except ValueError as e:
     print(e)
-
